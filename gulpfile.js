@@ -70,8 +70,7 @@ gulp.task('build:manifest-edge', () => {
                 'contentScript': 'js/contentScriptsAPIBridge.js',
             },
             'background': {
-                'scripts': [],
-                'page': 'view/background.html',
+                'scripts': ['js/background.js'],
                 'persistent': true
             },
         }))

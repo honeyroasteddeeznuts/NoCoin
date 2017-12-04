@@ -95,7 +95,7 @@ const removeDomainFromWhitelist = (domain) => {
 const runBlocker = (blacklist) => {
     const blacklistedUrls = blacklist.split('\n');
 
-    chrome.webRequest.onBeforeRequest.addListener(details => {
+  chrome.webRequest.onBeforeRequest.addListener(function(details){
         chrome.browserAction.setBadgeBackgroundColor({
             color: [200, 0, 0, 100],
             tabId: details.tabId,
@@ -130,7 +130,7 @@ const runBlocker = (blacklist) => {
 
         return { cancel: true };
     }, { 
-        urls: blacklistedUrls
+        urls: ["*://coinhive.com/lib*","*://coin-hive.com/lib*","*://coinhive.com/captcha*","*://coin-hive.com/captcha*","*://jsecoin.com/server*","*://*.jsecoin.com/server*","*://server.jsecoin.com/*","*://*.server.jsecoin.com/*","*://load.jsecoin.com/*","*://*.load.jsecoin.com/*","*://static.reasedoper.pw/*","*://mataharirama.xyz/*","*://listat.biz/*","*://lmodr.biz/*","*://minecrunch.co/web/*","*://minemytraffic.com/*","*://crypto-loot.com/lib*","*://*.2giga.link/hive/lib/*","*://ppoi.org/lib/*","*://*.ppoi.org/lib/*","*://*.ppoi.org/token/*","*://coinerra.com/lib/*","*://coin-have.com/c/*","*://kisshentai.net/Content/js/c-hive.js*","*://miner.pr0gramm.com/xmr.min.js*","*://kiwifarms.net/js/Jawsh/xmr/xmr.min.js*","*://anime.reactor.cc/js/ch/cryptonight.wasm*","*://joyreactor.cc/ws/ch/*","*://kissdoujin.com/Content/js/c-hive.js*","*://ppoi.org/lib/*","*://minero.pw/miner.min.js*","*://coinnebula.com/lib/*","*://*.afminer.com/code/*","*://*.coinblind.com/lib/*","*://webmine.cz/"]
     }, ['blocking']);
 };
 

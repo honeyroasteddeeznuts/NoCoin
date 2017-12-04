@@ -56,7 +56,7 @@ const sendWhitelistUpdate = (time) => {
         whitelisted,
     }, (response) => {
         setWhitelistDisplay(response);
-        chrome.tabs.reload(currentTabId);
+        chrome.tabs.executeScript(currentTabId, {code:"document.location.reload(true);"});
     });
 }
 
@@ -64,7 +64,7 @@ const sendWhitelistUpdate = (time) => {
 document.querySelector('.toggle').addEventListener('click', () => {
     chrome.runtime.sendMessage({ type: 'TOGGLE' }, (response) => {
         setToggleButton(response);
-        chrome.tabs.reload(currentTabId);
+        chrome.tabs.executeScript(currentTabId, {code:"document.location.reload(true);"});
     });
 });
 
