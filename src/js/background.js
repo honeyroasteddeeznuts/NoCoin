@@ -97,37 +97,37 @@ const runBlocker = function(blacklist){
 
   chrome.webRequest.onBeforeRequest.addListener(
 	function(details){
-        // chrome.browserAction.setBadgeBackgroundColor({
-            // color: [200, 0, 0, 100],
-            // tabId: details.tabId,
-        // });
+        chrome.browserAction.setBadgeBackgroundColor({
+            color: [200, 0, 0, 100],
+            tabId: details.tabId,
+        });
 		
-        // chrome.browserAction.setBadgeText({
-            // text: '!',
-            // tabId: details.tabId,
-        // });
+        chrome.browserAction.setBadgeText({
+            text: '!',
+            tabId: details.tabId,
+        });
 
-        // detected[details.tabId] = true;
+        detected[details.tabId] = true;
 
         // Globally paused
-        // if (!config.toggle) {
-            // return { cancel: false };
-        // }
+        if (!config.toggle) {
+            return { cancel: false };
+        }
 
         // Is domain white listed
-        // if (isDomainWhitelisted(domains[details.tabId])) {
-            // chrome.browserAction.setIcon({
-                // path: 'img/logo_enabled_whitelisted.png',
-                // tabId: details.tabId,
-            // });
+        if (isDomainWhitelisted(domains[details.tabId])) {
+            chrome.browserAction.setIcon({
+                path: 'img/logo_enabled_whitelisted.png',
+                tabId: details.tabId,
+            });
 
-            // return { cancel: false };
-        // }
+            return { cancel: false };
+        }
 
-        // chrome.browserAction.setIcon({
-            // path: 'img/logo_enabled_blocked.png',
-            // tabId: details.tabId,
-        // });
+        chrome.browserAction.setIcon({
+            path: 'img/logo_enabled_blocked.png',
+            tabId: details.tabId,
+        });
 
 		return { cancel: true };}, 
 		{urls: blacklistedUrls}, 
