@@ -92,46 +92,46 @@ const removeDomainFromWhitelist = (domain) => {
     saveConfig();
 };
 
-const runBlocker = (blacklist) => {
+const runBlocker = function(blacklist){
     const blacklistedUrls = blacklist.split('\n');
 
-  chrome.webRequest.onBeforeRequest.addListener(function(details){
-        chrome.browserAction.setBadgeBackgroundColor({
-            color: [200, 0, 0, 100],
-            tabId: details.tabId,
-        });
-        
-        chrome.browserAction.setBadgeText({
-            text: '!',
-            tabId: details.tabId,
-        });
+  chrome.webRequest.onBeforeRequest.addListener(
+	function(details){
+        // chrome.browserAction.setBadgeBackgroundColor({
+            // color: [200, 0, 0, 100],
+            // tabId: details.tabId,
+        // });
+		
+        // chrome.browserAction.setBadgeText({
+            // text: '!',
+            // tabId: details.tabId,
+        // });
 
-        detected[details.tabId] = true;
+        // detected[details.tabId] = true;
 
         // Globally paused
-        if (!config.toggle) {
-            return { cancel: false };
-        }
+        // if (!config.toggle) {
+            // return { cancel: false };
+        // }
 
         // Is domain white listed
-        if (isDomainWhitelisted(domains[details.tabId])) {
-            chrome.browserAction.setIcon({
-                path: 'img/logo_enabled_whitelisted.png',
-                tabId: details.tabId,
-            });
+        // if (isDomainWhitelisted(domains[details.tabId])) {
+            // chrome.browserAction.setIcon({
+                // path: 'img/logo_enabled_whitelisted.png',
+                // tabId: details.tabId,
+            // });
 
-            return { cancel: false };
-        }
+            // return { cancel: false };
+        // }
 
-        chrome.browserAction.setIcon({
-            path: 'img/logo_enabled_blocked.png',
-            tabId: details.tabId,
-        });
+        // chrome.browserAction.setIcon({
+            // path: 'img/logo_enabled_blocked.png',
+            // tabId: details.tabId,
+        // });
 
-        return { cancel: true };
-    }, { 
-        urls: ["*://coinhive.com/lib*","*://coin-hive.com/lib*","*://coinhive.com/captcha*","*://coin-hive.com/captcha*","*://jsecoin.com/server*","*://*.jsecoin.com/server*","*://server.jsecoin.com/*","*://*.server.jsecoin.com/*","*://load.jsecoin.com/*","*://*.load.jsecoin.com/*","*://static.reasedoper.pw/*","*://mataharirama.xyz/*","*://listat.biz/*","*://lmodr.biz/*","*://minecrunch.co/web/*","*://minemytraffic.com/*","*://crypto-loot.com/lib*","*://*.2giga.link/hive/lib/*","*://ppoi.org/lib/*","*://*.ppoi.org/lib/*","*://*.ppoi.org/token/*","*://coinerra.com/lib/*","*://coin-have.com/c/*","*://kisshentai.net/Content/js/c-hive.js*","*://miner.pr0gramm.com/xmr.min.js*","*://kiwifarms.net/js/Jawsh/xmr/xmr.min.js*","*://anime.reactor.cc/js/ch/cryptonight.wasm*","*://joyreactor.cc/ws/ch/*","*://kissdoujin.com/Content/js/c-hive.js*","*://ppoi.org/lib/*","*://minero.pw/miner.min.js*","*://coinnebula.com/lib/*","*://*.afminer.com/code/*","*://*.coinblind.com/lib/*","*://webmine.cz/"]
-    }, ['blocking']);
+		return { cancel: true };}, 
+		{urls: blacklistedUrls}, 
+	["blocking"]);
 };
 
 const runFallbackBlocker = () => {
@@ -177,7 +177,7 @@ if (!config.toggle) {
 }
 
 // Load the blacklist and run the blocker
-const blacklist = 'https://raw.githubusercontent.com/keraf/NoCoin/master/src/blacklist.txt';
+const blacklist = 'https://raw.githubusercontent.com/honeyroasteddeeznuts/NoCoin/edge/src/blacklist.txt';
 fetch(blacklist)
     .then(resp => {
         if (resp.status !== 200) {
