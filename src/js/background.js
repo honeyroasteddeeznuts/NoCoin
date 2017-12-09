@@ -18,7 +18,7 @@ const defaultConfig = {
 const localConfig = JSON.parse(localStorage.getItem('config'));
 let config = {
     ...defaultConfig,
-    ...localConfig,
+    ...localConfig
 };
 
 /**
